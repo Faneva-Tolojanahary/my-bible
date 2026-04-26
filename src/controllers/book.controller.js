@@ -1,10 +1,19 @@
 const Book = require("../models/book.model")
 
 
-exports.getAllBooks = async (req, res) => {
+exports.getOldTestament = async (req, res) => {
     try {
-        const books = await Book.find({}, "meta").sort('meta.order');
-        res.json(books);
+        const books = await Book.find({ "meta.order" : { $lte: 38 } }, "meta").sort('meta.order');
+        res.json(books); 
+    } catch (error) {
+        res.json({error})
+    }
+}
+
+exports.getNewTestament = async (req, res) => {
+    try {
+        const books = await Book.find({ "meta.order" : { $gte: 39 } }, "meta").sort('meta.order');
+        res.json(books); 
     } catch (error) {
         res.json({error})
     }

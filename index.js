@@ -1,10 +1,12 @@
 const express = require("express");
-require("./src/config/database");
+const connectDB = require("./src/config/database");
 const bookRoutes = require("./src/routes/book.router");
 const cors = require("cors");
 
 const app = express();
+require('dotenv').config({ path: './src/config/.env' });
 
+connectDB();
 
 app.use(cors({
   origin: 'http://localhost:3000', 
@@ -15,6 +17,6 @@ app.use(cors({
 app.use("/api", bookRoutes);
 
 
-app.listen(5000, () => {
-    console.log("Serveur lancé");
+app.listen(process.env.PORT, () => {
+    console.log(`Serveur lancé sur ${process.env.PORT}`);
 });
