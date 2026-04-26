@@ -9,7 +9,7 @@ require('dotenv').config({ path: './src/config/.env' });
 connectDB();
 
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: 'http://localhost:3000' || "https://my-bible-front.vercel.app" , 
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true 
 }));
